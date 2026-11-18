@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafePulse · Panel General del Clima Escolar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- BARRA LATERAL -->
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">
+      <span class="brand-logo">
+        <span class="material-symbols-rounded">shield</span>
+      </span>
+      <span class="brand-name">SafePulse</span>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Navegación principal">
+      <button class="nav-btn active" data-view="dashboard">
+        <span class="material-symbols-rounded">dashboard</span>
+        <span>Panel general</span>
+      </button>
+      <button class="nav-btn" data-view="inbox">
+        <span class="material-symbols-rounded">inbox</span>
+        <span>Buzón de alertas</span>
+        <span class="badge-count">7</span>
+      </button>
+      <button class="nav-btn" data-view="tickets">
+        <span class="material-symbols-rounded">confirmation_number</span>
+        <span>Gestión de tickets</span>
+      </button>
+      <button class="nav-btn" data-notice="Métricas preventivas cargadas">
+        <span class="material-symbols-rounded">bar_chart</span>
+        <span>Métricas preventivas</span>
+      </button>
+      <a href="pages/movil.html" class="nav-btn">
+        <span class="material-symbols-rounded">favorite</span>
+        <span>Contención (App)</span>
+      </a>
+      <button class="nav-btn" data-notice="Configuración del establecimiento">
+        <span class="material-symbols-rounded">settings</span>
+        <span>Configuración</span>
+      </button>
+    </nav>
+
+    <div class="user-card">
+      <span class="avatar">LR</span>
+      <div>
+        <p class="user-name">Lucía Rojas</p>
+        <p class="user-role">Psicóloga · Sede central</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <button id="menu-toggle" class="icon-circle mobile-only" aria-label="Abrir menú">
+        <span class="material-symbols-rounded">menu</span>
+      </button>
+      <h1 id="page-title" class="page-title">Panel general del clima escolar</h1>
+
+      <!-- BOTÓN HACIA APP APODERADO -->
+      <a href="pages/apoderados.html" class="btn-apoderado">
+        <span class="material-symbols-rounded">family_restroom</span>
+        Ver App Apoderado
+      </a>
+
+      <label class="search-box">
+        <span class="material-symbols-rounded">search</span>
+        <input id="global-search" type="search" placeholder="Buscar caso o código" aria-label="Buscar caso o código" />
+      </label>
+
+      <button class="icon-circle" data-notice="Tienes 3 alertas nuevas sin leer" aria-label="Notificaciones">
+        <span class="material-symbols-rounded">notifications</span>
+        <span class="notif-dot"></span>
+      </button>
+    </header>
+
+    <main class="content">
+      <!-- VISTA 1: PANEL GENERAL -->
+      <section id="view-dashboard" class="view-section">
+        <div class="stats-grid">
+          <article class="stat-card">
+            <span class="stat-icon bg-sky"><span class="material-symbols-rounded">folder</span></span>
+            <div>
+              <p class="stat-label">Total de casos</p>
+              <p class="stat-value">128</p>
+              <p class="stat-sub">+6 este mes</p>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-icon bg-amber"><span class="material-symbols-rounded">schedule</span></span>
+            <div>
+              <p class="stat-label">Pendientes</p>
+              <p class="stat-value">14</p>
+              <p class="stat-sub">3 con prioridad alta</p>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <span class="stat-icon bg-emerald"><span class="material-symbols-rounded">check</span></span>
+            <div>
+              <p class="stat-label">Cerrados</p>
+              <p class="stat-value">96</p>
+              <p class="stat-sub">75 % del total</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <!-- Alertas en tiempo real (se llena con main.js) -->
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Alertas en tiempo real</h2>
+              <button class="link-btn" data-switch="inbox">Ver todas →</button>
+            </div>
+            <div id="realtime-list" class="report-list"></div>
+          </section>
+
+          <!-- Columna derecha -->
+          <div class="side-panels">
+            <section class="panel">
+              <h2>Casos por estado</h2>
+              <div class="chart-row">
+                <div class="donut">
+                  <div class="donut-center">128</div>
+                </div>
+                <ul class="legend">
+                  <li><i class="dot emerald"></i> Cerrado · 96</li>
+                  <li><i class="dot sky"></i> En revisión · 18</li>
+                  <li><i class="dot amber"></i> Pendiente · 14</li>
+                </ul>
+              </div>
+            </section>
+
+            <section class="panel">
+              <h2>Accesos rápidos</h2>
+              <div class="quick-links">
+                <button class="quick-btn" data-switch="inbox">Ir al Buzón de alertas</button>
+                <button class="quick-btn" data-switch="tickets">Ir a Gestión de tickets</button>
+                <a href="pages/apoderados.html" class="quick-btn">Abrir App Apoderado</a>
+                <a href="pages/movil.html" class="quick-btn">Abrir App Estudiante</a>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISTA 2: BUZÓN DE ALERTAS -->
+      <section id="view-inbox" class="view-section hidden">
+        <div class="tabs-bar">
+          <button class="tab-btn active" data-tab="main">Bandeja principal <span class="pill-count">7</span></button>
+          <button class="tab-btn" data-tab="spam">Posible Spam <span class="pill-count">3</span></button>
+        </div>
+
+        <div class="filters-bar">
+          <select id="filter-severity" class="select-control" aria-label="Filtrar por severidad">
+            <option value="Todas">Severidad: Todas</option>
+            <option value="Alta">Alta</option>
+            <option value="Media">Media</option>
+            <option value="Baja">Baja</option>
+          </select>
+
+          <select id="filter-type" class="select-control" aria-label="Filtrar por tipología">
+            <option value="Todas">Tipología: Todas</option>
+            <option value="Ciberacoso por mensajería">Ciberacoso por mensajería</option>
+            <option value="Difusión de imágenes">Difusión de imágenes</option>
+            <option value="Exclusión en grupos">Exclusión en grupos</option>
+            <option value="Insultos en redes">Insultos en redes</option>
+          </select>
+
+          <input id="inbox-search" type="search" class="select-control" placeholder="Buscar en buzón..." />
+        </div>
+
+        <div class="table-card">
+          <table class="alerts-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Reporte</th>
+                <th>Remitente</th>
+                <th>Tipología</th>
+                <th>Severidad</th>
+                <th>Recibido</th>
+                <th>Estado</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="inbox-tbody"></tbody>
+          </table>
+          <div id="inbox-empty" class="empty-state hidden"></div>
+        </div>
+      </section>
+
+      <!-- VISTA 3: GESTIÓN DE TICKETS -->
+      <section id="view-tickets" class="view-section hidden">
+        <p style="font-size: 13px; color: #64748b;">Gestión de tickets › Caso #SP-2041</p>
+        <div class="ticket-header">
+          <div class="ticket-meta">
+            <h2>Caso #SP-2041</h2>
+            <span class="tag tag-alta">Alta</span>
+            <span class="tag tag-emotional">♥ Atención Emocional</span>
+            <span style="font-size: 13px; color: #64748b;">Remitente: Anónimo</span>
+          </div>
+          <div class="ticket-actions">
+            <select id="ticket-status" class="select-control" aria-label="Estado del caso">
+              <option>En revisión</option>
+              <option>Pendiente</option>
+              <option>Cerrado</option>
+            </select>
+            <button class="btn-outline" data-notice="Citación para apoderados preparada">Citar apoderados</button>
+            <button class="btn-primary" data-notice="Caso derivado al tutor">Derivar a tutor</button>
+          </div>
+        </div>
+
+        <div class="ticket-grid">
+          <div class="ticket-col">
+            <section class="panel">
+              <h3>Descripción del reporte</h3>
+              <p class="body-text">Desde hace dos semanas recibo mensajes en un grupo del colegio donde se burlan de mí y comparten capturas de mis chats. Ya no quiero ir a clases y me siento muy mal.</p>
+            </section>
+
+            <section class="panel">
+              <h3>Evidencia · visor seguro</h3>
+              <div class="watermark-box">SafePulse · Confidencial</div>
+              <div class="chips-row">
+                <span class="chip">⊘ Descarga bloqueada</span>
+                <span class="chip">♧ Metadatos eliminados</span>
+              </div>
+            </section>
+
+            <section class="panel">
+              <h3>Chat asíncrono con el denunciante</h3>
+              <div id="chat-messages" class="chat-box">
+                <div class="msg incoming">¿Puedes contarnos más detalles?</div>
+                <div class="msg outgoing">Sí, pasó ayer por la noche...</div>
+              </div>
+              <div class="chat-input-row">
+                <input id="chat-input" type="text" placeholder="Escribe un mensaje..." />
+                <button id="chat-send" class="btn-primary">Enviar</button>
+              </div>
+            </section>
+          </div>
+
+          <div class="ticket-col">
+            <section class="panel">
+              <h3>Notas clínicas privadas</h3>
+              <textarea class="notes-area">Estudiante refiere aislamiento y malestar. Se programa entrevista individual y se coordina con el tutor de aula.</textarea>
+              <p class="autosave-hint">☁ Autoguardado · 10:42 · Solo visible para ti</p>
+            </section>
+
+            <section class="panel">
+              <h3>Bitácora de cambios</h3>
+              <ul id="audit-log" class="timeline">
+                <li><strong>10:42</strong> · Estado cambiado a "En revisión"</li>
+                <li><strong>10:30</strong> · Severidad confirmada: Alta</li>
+                <li><strong>10:12</strong> · Reporte recibido y fijado</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="js/main.js"></script>
+</body>
+</html>

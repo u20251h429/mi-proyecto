@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafePulse · App Estudiante</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body class="mobile-bg">
+  <div class="phone-frame">
+    <div class="phone-notch">
+      <span>9:41</span>
+      <a href="../index.html" class="back-desktop-link">Volver al Panel Web ✕</a>
+    </div>
+
+    <!-- PANTALLA 1: CONTENCIÓN -->
+    <main id="mob-containment" class="phone-screen">
+      <div class="welcome-banner">
+        <h2>Hoy puedes ir paso a paso.</h2>
+        <p>Aquí no estás solo/a.</p>
+      </div>
+
+      <button class="calm-btn" data-mob="breathing">Necesito calma</button>
+
+      <div class="sos-wrapper">
+        <button id="sos-btn" class="sos-circle">
+          <strong>SOS</strong>
+          <small>Ejercicio inmediato</small>
+        </button>
+      </div>
+
+      <button class="breathing-card" data-mob="breathing">
+        <div>
+          <strong>Respiración guiada</strong>
+          <small>1 min · Pulso háptico</small>
+        </div>
+        <span class="play-badge">▶</span>
+      </button>
+
+      <a href="tel:" class="call-btn">Llamar a mi contacto de confianza</a>
+    </main>
+
+    <!-- PANTALLA 2: RESPIRACIÓN GUIADA -->
+    <main id="mob-breathing" class="phone-screen hidden">
+      <div class="mob-header">
+        <button class="mob-back" data-mob="containment">←</button>
+        <h2>Respiración guiada</h2>
+      </div>
+      <p class="mob-sub">1 minuto · Sigue el ritmo del círculo</p>
+
+      <div class="breath-circle-wrap">
+        <div id="breath-circle" class="breath-circle">
+          <strong id="breath-phase">Inhala</strong>
+          <small id="breath-sec">4 s</small>
+        </div>
+      </div>
+
+      <p id="breath-timer" class="timer-display">00:42</p>
+      <div class="progress-track"><div id="breath-bar" class="progress-fill" style="width: 70%;"></div></div>
+
+      <div class="breath-controls">
+        <button id="toggle-pause" class="ctrl-btn">Pausar</button>
+        <button id="add-minute" class="ctrl-btn">+ 1 minuto</button>
+      </div>
+    </main>
+
+    <!-- PANTALLA 3: REPORTE ANÓNIMO -->
+    <main id="mob-report" class="phone-screen hidden">
+      <div class="mob-header">
+        <button class="mob-back" data-mob="containment">←</button>
+        <h2>Reporte anónimo</h2>
+      </div>
+
+      <div class="anon-box">
+        <div>
+          <strong>Enviar como anónimo</strong>
+          <p>Tu nombre no se guarda en el reporte</p>
+        </div>
+        <input type="checkbox" checked aria-label="Enviar como anónimo" />
+      </div>
+
+      <label class="field-label" for="rep-desc">¿Qué ocurrió? <span class="req">Obligatorio</span></label>
+      <textarea id="rep-desc" class="mob-textarea" placeholder="Cuéntanos con tus palabras lo que está pasando..."></textarea>
+      <p id="rep-error" class="error-msg hidden">Cuéntanos qué ocurrió antes de enviar.</p>
+
+      <div class="privacy-note">🔒 Tu reporte se envía cifrado y sin datos personales</div>
+      <button id="send-report-btn" class="submit-report-btn">Enviar reporte</button>
+    </main>
+
+    <!-- PANTALLA 4: CONFIRMACIÓN -->
+    <main id="mob-sent" class="phone-screen hidden">
+      <div class="sent-check">✓</div>
+      <h2 class="sent-title">Tu reporte fue enviado de forma segura</h2>
+      <div class="code-box">
+        <p>Tu código de seguimiento</p>
+        <strong id="tracking-code">SP-7K4Q-92</strong>
+        <button id="copy-code-btn" class="btn-outline">Copiar código</button>
+      </div>
+      <button class="calm-btn" data-mob="containment">Volver al inicio</button>
+    </main>
+
+    <nav class="phone-nav">
+      <button class="phone-tab active" data-mob="containment">Contención</button>
+      <button class="phone-tab" data-mob="report">Reportes</button>
+      <button class="phone-tab" data-mob="containment">Perfil anónimo</button>
+    </nav>
+  </div>
+  <script src="../js/main.js"></script>
+</body>
+</html>

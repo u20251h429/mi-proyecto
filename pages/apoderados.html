@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SafePulse · App Apoderado</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body class="mobile-bg guardian-theme">
+  <div class="guardian-phone">
+    <div class="guardian-status">
+      <span>9:41</span>
+      <div class="status-icons">
+        <span class="material-symbols-rounded">signal_cellular_alt</span>
+        <span class="material-symbols-rounded">wifi</span>
+        <span class="material-symbols-rounded">battery_full</span>
+      </div>
+    </div>
+
+    <header class="guardian-header">
+      <button id="g-back-btn" class="g-circle-btn" aria-label="Volver">
+        <span id="g-back-icon" class="material-symbols-rounded">close</span>
+      </button>
+      <div class="g-brand">
+        <span class="g-brand-icon"><span class="material-symbols-rounded">family_restroom</span></span>
+        <div>
+          <p class="g-brand-sub">SafePulse</p>
+          <p class="g-brand-title">App Apoderado</p>
+        </div>
+      </div>
+      <button class="g-privacy-btn" onclick="showToast('Tus datos están protegidos')" aria-label="Privacidad">
+        <span class="material-symbols-rounded">verified_user</span>
+      </button>
+    </header>
+
+    <!-- PANTALLA 1: REGISTRO Y VALIDACIÓN -->
+    <main id="g-registration" class="g-screen">
+      <span class="g-pill emerald"><span class="material-symbols-rounded">verified</span> IDENTIDAD CONFIRMADA</span>
+      <h1 class="g-title">Registro y validación</h1>
+      <p class="g-desc">Confirmamos tu relación con la estudiante antes de crear la vinculación.</p>
+
+      <section class="g-card">
+        <div class="g-profile-row">
+          <span class="g-initials">CR</span>
+          <div>
+            <h2>Carolina Andrea Rojas Fuentes</h2>
+            <p>Apoderada legal · 8° B</p>
+          </div>
+        </div>
+        <dl class="g-dl">
+          <div><dt>Correo</dt><dd>carolina.rojas@email.cl</dd></div>
+          <div><dt>Estudiante</dt><dd>Martina Muñoz Rojas</dd></div>
+          <div><dt>Establecimiento</dt><dd>Colegio Los Alerces</dd></div>
+        </dl>
+      </section>
+
+      <div class="g-verified-box">
+        <span class="g-white-circle"><span class="material-symbols-rounded">verified_user</span></span>
+        <div>
+          <strong>Cuenta verificada por el colegio</strong>
+          <p>Validación realizada el 18 de junio de 2025.</p>
+        </div>
+      </div>
+
+      <button class="g-btn-primary" data-gscreen="link">
+        Continuar a vinculación <span class="material-symbols-rounded">arrow_forward</span>
+      </button>
+      <p class="g-footnote"><span class="material-symbols-rounded">lock</span> Tus datos se usan únicamente para validar el vínculo familiar con el establecimiento.</p>
+    </main>
+
+    <!-- PANTALLA 2: VINCULACIÓN CON CÓDIGO -->
+    <main id="g-link" class="g-screen hidden">
+      <span class="g-pill sky"><span class="material-symbols-rounded">link</span> CONEXIÓN SEGURA</span>
+      <h1 class="g-title">Vinculación con mi hijo/a</h1>
+      <p class="g-desc">Comparte este código para solicitar la vinculación.</p>
+
+      <div id="g-link-pending">
+        <section class="g-card text-center">
+          <p class="g-overline">Código de vinculación</p>
+          <div id="g-code-boxes" class="g-code-row">
+            <span>K</span><span>7</span><span>M</span><span>2</span><span>Q</span><span>9</span>
+          </div>
+          <p class="g-timer-text"><span class="material-symbols-rounded">timer</span> Expira en <strong id="g-link-timer">10:00</strong></p>
+        </section>
+
+        <div class="g-wait-box">
+          <span class="g-white-circle"><span class="material-symbols-rounded">hourglass_top</span></span>
+          <p>Esperando que tu hijo/a ingrese el código</p>
+        </div>
+
+        <button id="g-regen-code" class="g-btn-primary">
+          <span class="material-symbols-rounded">refresh</span> Generar nuevo código
+        </button>
+        <button id="g-sim-accept" class="g-btn-secondary">Simular aceptación</button>
+      </div>
+
+      <div id="g-link-success" class="hidden">
+        <section class="g-success-card">
+          <span class="g-success-icon"><span class="material-symbols-rounded">check_circle</span></span>
+          <h2>Vinculación exitosa</h2>
+          <p>La cuenta de Martina ya está conectada de forma segura.</p>
+        </section>
+        <button class="g-btn-primary" data-gscreen="summary">Ir al resumen de bienestar</button>
+        <button id="g-unlink-btn" class="g-btn-secondary">Desvincular cuenta</button>
+      </div>
+
+      <p class="g-footnote"><span class="material-symbols-rounded">lock</span> Tu hijo/a debe aceptar la vinculación. No accedes a su dispositivo.</p>
+    </main>
+
+    <!-- PANTALLA 3: RESUMEN DE BIENESTAR -->
+    <main id="g-summary" class="g-screen hidden">
+      <div class="g-welcome-row">
+        <div>
+          <p class="g-hello">Hola, Carolina</p>
+          <h1 class="g-title-sm">Resumen de bienestar y control nocturno</h1>
+        </div>
+        <span class="g-avatar-sm">M</span>
+      </div>
+
+      <button class="g-sos-alert" data-gscreen="safety">
+        <span class="g-sos-badge"><span class="material-symbols-rounded">sos</span></span>
+        <div class="flex-1 text-left">
+          <strong>Alerta SOS de tu hijo/a</strong>
+          <p>hace 2 min · Ver ubicación activa</p>
+        </div>
+        <span class="material-symbols-rounded">chevron_right</span>
+      </button>
+
+      <section class="g-dark-card">
+        <div class="g-dark-row">
+          <span class="g-dark-icon"><span class="material-symbols-rounded">bedtime</span></span>
+          <div class="flex-1">
+            <h2>Descanso nocturno</h2>
+            <p>Bloqueo de 20:00 a 06:00</p>
+          </div>
+          <input id="g-night-switch" type="checkbox" checked class="g-switch" aria-label="Activar descanso nocturno" />
+        </div>
+        <p id="g-night-status" class="g-dark-foot">✓ Programación activa para todos los días</p>
+      </section>
+
+      <section class="g-card">
+        <div class="g-card-top">
+          <div>
+            <h2>Tiempo saludable en pantalla</h2>
+            <p class="g-sub">Uso diario · meta máxima 3 h</p>
+          </div>
+          <span class="g-badge emerald">5 de 7 días</span>
+        </div>
+        <div class="g-bars">
+          <div><i style="height:55%"></i><span>L</span></div>
+          <div><i style="height:78%"></i><span>M</span></div>
+          <div><i style="height:47%"></i><span>M</span></div>
+          <div><i style="height:68%"></i><span>J</span></div>
+          <div><i class="warn" style="height:88%"></i><span>V</span></div>
+          <div><i style="height:61%"></i><span>S</span></div>
+          <div><i style="height:42%"></i><span>D</span></div>
+        </div>
+      </section>
+
+      <section class="g-card">
+        <div class="g-card-top">
+          <div>
+            <p class="g-overline">Estado de ánimo</p>
+            <h2>Lunes a domingo</h2>
+          </div>
+          <span class="g-badge sky">Esta semana</span>
+        </div>
+        <div class="g-moods">
+          <div style="height:56px">🙂</div>
+          <div style="height:45px">😐</div>
+          <div style="height:66px">😔</div>
+          <div style="height:78px">😢</div>
+          <div style="height:63px">😔</div>
+          <div style="height:50px">🙂</div>
+          <div style="height:44px">😐</div>
+        </div>
+        <p class="g-muted-note"><span class="material-symbols-rounded">visibility_off</span> Las notas privadas de tu hijo/a no se muestran</p>
+      </section>
+
+      <div class="g-rose-tip">
+        <span class="g-white-circle"><span class="material-symbols-rounded">favorite</span></span>
+        <div>
+          <strong>Quizá sea buen momento para conversar</strong>
+          <p>Escuchar con calma puede ayudar.</p>
+        </div>
+      </div>
+
+      <h2 class="g-sec-heading">Accesos rápidos</h2>
+      <div class="g-quick-grid">
+        <button class="g-quick-tile sky" data-gscreen="safety"><span class="material-symbols-rounded">shield</span>Seguridad</button>
+        <button class="g-quick-tile emerald" data-gscreen="pin"><span class="material-symbols-rounded">folder_open</span>Casos</button>
+        <button class="g-quick-tile white" data-gscreen="chat"><span class="material-symbols-rounded">chat_bubble</span>Mensajes</button>
+      </div>
+    </main>
+
+    <!-- PANTALLA 4: SEGURIDAD Y UBICACIÓN SOS -->
+    <main id="g-safety" class="g-screen hidden">
+      <div class="g-sos-banner">
+        <span class="g-sos-badge"><span class="material-symbols-rounded">sos</span></span>
+        <div>
+          <strong>Alerta SOS de tu hijo/a</strong>
+          <p>hace 2 min</p>
+        </div>
+        <span class="g-pulse-dot"></span>
+      </div>
+
+      <div class="g-card-top mt-3">
+        <div>
+          <p class="g-overline sky">Ubicación temporal</p>
+          <h1 class="g-title-sm">Martina está aquí</h1>
+        </div>
+        <span class="g-badge emerald">En vivo</span>
+      </div>
+
+      <section class="g-map-box">
+        <div id="g-map-canvas" class="g-map-streets">
+          <svg viewBox="0 0 350 300" aria-hidden="true">
+            <rect width="350" height="300" fill="#E0F2FE" />
+            <path d="M-20 74C71 31 122 117 206 78s110-25 170-7" fill="none" stroke="#fff" stroke-width="24" />
+            <path d="M57-20c35 84-3 139 38 206s59 98 50 178" fill="none" stroke="#fff" stroke-width="20" />
+            <path d="M198-10c-13 75 33 108 24 174s-4 115 78 194" fill="none" stroke="#fff" stroke-width="18" />
+            <path d="M-10 220c81-34 137-12 202 18s116 10 178-11" fill="none" stroke="#fff" stroke-width="22" />
+            <rect x="253" y="70" width="56" height="47" rx="9" fill="#D1FAE5" />
+            <rect x="21" y="230" width="73" height="45" rx="9" fill="#D1FAE5" />
+          </svg>
+        </div>
+        <div id="g-map-tooltip" class="g-map-tip">
+          <strong>Av. Los Alerces 1240</strong>
+          <p>Precisión aproximada: 20 m</p>
+        </div>
+        <button id="g-pin-marker" class="g-map-pin" aria-label="Ver detalles del marcador">
+          <span class="material-symbols-rounded">person_pin_circle</span>
+        </button>
+        <div class="g-zoom-btns">
+          <button id="g-zoom-in" aria-label="Acercar">+</button>
+          <button id="g-zoom-out" aria-label="Alejar">−</button>
+        </div>
+      </section>
+
+      <p class="g-time-row"><span class="material-symbols-rounded">schedule</span> Última ubicación: 3:42 p. m.</p>
+      <p class="g-muted-note"><span class="material-symbols-rounded">lock</span> La ubicación solo se comparte durante una alerta activa</p>
+
+      <div class="g-two-cols">
+        <a href="tel:+56912345678" class="g-btn-primary"><span class="material-symbols-rounded">call</span> Llamar</a>
+        <button class="g-btn-secondary" data-gscreen="chat"><span class="material-symbols-rounded">chat</span> Escribir al tutor</button>
+      </div>
+    </main>
+
+    <!-- PANTALLA 5: PIN DE ACCESO A CASOS -->
+    <main id="g-pin" class="g-screen center-col hidden">
+      <span class="g-lock-box"><span class="material-symbols-rounded">lock</span></span>
+      <h1 class="g-title-sm">Historial protegido</h1>
+      <p class="g-desc text-center">Ingresa tu PIN para consultar los incidentes vinculados a Martina.</p>
+
+      <div id="g-pin-dots" class="g-pin-dots">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <p id="g-pin-error" class="g-pin-err"></p>
+
+      <div class="g-keypad">
+        <button data-digit="1">1</button><button data-digit="2">2</button><button data-digit="3">3</button>
+        <button data-digit="4">4</button><button data-digit="5">5</button><button data-digit="6">6</button>
+        <button data-digit="7">7</button><button data-digit="8">8</button><button data-digit="9">9</button>
+        <button id="g-bio-btn" class="sky-txt" aria-label="Huella"><span class="material-symbols-rounded">fingerprint</span></button>
+        <button data-digit="0">0</button>
+        <button id="g-del-btn" aria-label="Borrar"><span class="material-symbols-rounded">backspace</span></button>
+      </div>
+      <p class="g-hint">PIN de prueba: 1234 (o toca la huella)</p>
+    </main>
+
+    <!-- PANTALLA 6: HISTORIAL DE INCIDENTES Y ACTAS -->
+    <main id="g-incidents" class="g-screen hidden">
+      <p class="g-overline sky">Acceso protegido</p>
+      <h1 class="g-title-sm">Historial de incidentes y actas</h1>
+
+      <div class="g-seg-tabs">
+        <button class="g-seg-btn active" data-gtab="history">Historial</button>
+        <button class="g-seg-btn" data-gtab="agreements">Actas (2)</button>
+      </div>
+
+      <div id="g-tab-history" class="g-stack">
+        <article class="g-incident-card">
+          <div class="g-inc-head">
+            <span class="g-inc-icon"><span class="material-symbols-rounded">report</span></span>
+            <div>
+              <h2>Ciberacoso por mensajería</h2>
+              <p>17 de junio de 2025 · Grupo de mensajería del curso</p>
+              <span class="g-badge amber">En revisión</span>
+            </div>
+          </div>
+          <div class="g-inc-notes">
+            El equipo de convivencia entrevistó a Martina y al tutor. Se contactará a las familias involucradas y se realizará seguimiento durante la semana.
+          </div>
+        </article>
+
+        <article class="g-incident-card">
+          <div class="g-inc-head">
+            <span class="g-inc-icon"><span class="material-symbols-rounded">report</span></span>
+            <div>
+              <h2>Exclusión en actividad grupal</h2>
+              <p>3 de junio de 2025 · Sala 8° B</p>
+              <span class="g-badge emerald">Atendido</span>
+            </div>
+          </div>
+          <div class="g-inc-notes">
+            Se realizó mediación con el grupo y se acordaron nuevas dinámicas de participación. Martina indicó sentirse más tranquila.
+          </div>
+        </article>
+      </div>
+
+      <div id="g-tab-agreements" class="g-stack hidden">
+        <div class="g-two-cols">
+          <button class="g-btn-primary" onclick="window.print()">Exportar PDF</button>
+          <button class="g-btn-secondary" onclick="showToast('Reunión solicitada al colegio')">Agendar reunión</button>
+        </div>
+
+        <section class="g-dark-card">
+          <div class="g-dark-row">
+            <span class="g-dark-icon"><span class="material-symbols-rounded">support_agent</span></span>
+            <div class="flex-1">
+              <h2>Directorio de ayuda</h2>
+              <p>Línea 100 / DEMUNA · Disponible sin conexión</p>
+            </div>
+            <a href="tel:100" class="g-call-pill"><span class="material-symbols-rounded">call</span></a>
+          </div>
+        </section>
+
+        <article class="g-incident-card">
+          <h2>Acuerdo de acompañamiento y convivencia</h2>
+          <p class="g-sub">Reunión de seguimiento · Reporte SP-2018 cerrado</p>
+          <ol class="g-commit-list">
+            <li>El tutor realizará una conversación de seguimiento con Martina cada viernes durante cuatro semanas.</li>
+            <li>Los apoderados informarán al tutor cualquier cambio relevante observado en casa.</li>
+          </ol>
+          <button id="g-sign-btn" class="g-btn-primary mt-3">
+            <span class="material-symbols-rounded">draw</span> Firmar digitalmente
+          </button>
+        </article>
+      </div>
+    </main>
+
+    <!-- PANTALLA 7: MENSAJES CON EL TUTOR -->
+    <main id="g-chat" class="g-screen no-pad hidden">
+      <div class="g-tutor-bar">
+        <span class="g-initials sm">DM</span>
+        <div class="flex-1">
+          <h2>Diego Morales</h2>
+          <p>● Tutor de Martina · Disponible</p>
+        </div>
+        <button class="g-call-pill" onclick="showToast('Llamando al tutor')"><span class="material-symbols-rounded">call</span></button>
+      </div>
+
+      <div id="g-chat-feed" class="g-chat-feed">
+        <div class="g-bubble school">Hola, Carolina. Soy Diego Morales, tutor de Martina. Quedo atento a cualquier consulta.</div>
+        <div class="g-bubble me">Gracias, profesor. ¿Cómo la vio hoy después de la actividad de curso?</div>
+        <div class="g-bubble school">Estuvo más tranquila y participó con su grupo.</div>
+      </div>
+
+      <div class="g-chat-composer">
+        <p class="g-privacy-mini">🔒 Se eliminan los metadatos de las imágenes adjuntas</p>
+        <div class="g-composer-row">
+          <input id="g-chat-input" type="text" placeholder="Escribe un mensaje" />
+          <button id="g-chat-send" class="g-send-sq" aria-label="Enviar"><span class="material-symbols-rounded">send</span></button>
+        </div>
+      </div>
+    </main>
+
+    <nav id="g-bottom-nav" class="guardian-nav hidden" aria-label="Navegación App Apoderado">
+      <button class="g-nav-item active" data-gscreen="summary"><span class="material-symbols-rounded">home</span>Resumen</button>
+      <button class="g-nav-item" data-gscreen="safety"><span class="material-symbols-rounded">shield</span>Seguridad</button>
+      <button class="g-nav-item" data-gscreen="pin"><span class="material-symbols-rounded">folder_open</span>Casos</button>
+      <button class="g-nav-item" data-gscreen="chat"><span class="material-symbols-rounded">chat_bubble</span>Mensajes</button>
+    </nav>
+  </div>
+
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="../js/main.js"></script>
+</body>
+</html>
